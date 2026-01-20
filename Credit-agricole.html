@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accéder à mes comptes - Crédit Agricole</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    .left-column, .right-column {
+      flex: 1;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+    .left-column {
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .logo {
+      max-width: 150px;
+      margin-bottom: 20px;
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      display: block;
+      border-radius: 10px;
+    }
+
+    .card-text {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 80%;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #006634;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .btn.disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .btn.green {
+      background-color: #00994d;
+    }
+
+    .right-column {
+      background-color: #fff;
+    }
+
+    .right-column h1 {
+      color: #006634;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 20px;
+    }
+
+    .small {
+      font-size: 0.8em;
+      color: #555;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .keyboard {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .key {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      margin: 5px;
+      background-color: #eee;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .left-column, .right-column {
+        padding: 20px;
+      }
+    }
+
+    #password {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.2em;
+  letter-spacing: 5px;
+  text-align: center;
+}
+
+.titre {
+  font-size: 1.1em;
+  margin-top: 40px;
+  color: #006634;
+  text-align: center;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #006634;
+}
+
+.card p, .card ul {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.card a {
+  color: #00994d;
+  text-decoration: none;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+.card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.vigilance {
+  background-color: #fff5f5;
+  border: 1px solid #ffcccc;
+}
+
+.vigilance h3 {
+  color: #cc0000;
+}
+/* Cacher le slider en dessous de 768px */
+@media (max-width: 768px) {
+  .slider {
+    display: none;
+  }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- Splash Screen -->
+<div id="splash" style="position: fixed; top:0; left:0; width:100%; height:100%; background:white; display:flex; justify-content:center; align-items:center; z-index:10000;">
+  <img src="https://logo-marque.com/wp-content/uploads/2021/03/Credit-Agricole-Logo.png" id="splash-logo" style="width:100px; transition: all 5s ease;">
+</div>
+
+<div id="main-content" style="opacity: 0; transition: opacity 1s ease;">
+<img src="https://logo-marque.com/wp-content/uploads/2021/03/Credit-Agricole-Logo.png" alt="Logo Crédit Agricole" class="logo" width="100">
+  <div class="container">
+    <!-- Colonne Gauche -->
+  <div class="left-column">
+      
+      <div class="slider">
+        <div class="slides">
+          <div class="slide">
+            <img src="https://www.morenoconseil.com/wp-content/uploads/2019/05/CreditAgricole-AFFICHAGE_DIPLOME_A3_V2.jpg" alt="Slide 1">
+            <div class="card-text">Gérez votre budget en toute liberté</div>
+          </div>
+          <div class="slide">
+            <img src="https://www.agenceverywell.fr/_next/image?url=https%3A%2F%2Fcontent.agenceverywell.fr%2Fuploads%2FCA_31_Slider04_560x840_b11b6dc108.jpg&w=3840&q=100" alt="Slide 2">
+            <div class="card-text">Votre épargne sécurisée et disponible</div>
+          </div>
+          <div class="slide">
+            <img src="https://d9m1iyeq935g9.cloudfront.net/31549377283.png" alt="Slide 3">
+            <div class="card-text">Crédit adapté à vos projets</div>
+          </div>
+          <div class="slide">
+            <img src="https://www.k-unique.com/wp-content/uploads/2020/08/Affiches_Credit_Agricole_Habitat1.jpg" alt="Slide 4">
+            <div class="card-text">Assurez votre avenir sereinement</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Colonne Droite -->
+    <div class="right-column">
+  <h1>Accéder à mes comptes</h1>
+  <label for="identifiant">IDENTIFIANT</label>
+  <p class="small">Saisissez votre identifiant à 11 chiffres</p>
+  <input type="text" id="identifiant" placeholder="Exemple 98652706859">
+  <button class="btn disabled" id="code-btn">ENTRER MON CODE PERSONNEL</button>
+
+  <!-- Clavier et mot de passe -->
+  <div class="keyboard" id="keyboard">
+    <label for="password" class="small">Mot de passe</label>
+    <input type="password" id="password" readonly>
+
+    <div id="keys">
+      <div class="key">1</div>
+      <div class="key">2</div>
+      <div class="key">3</div>
+      <div class="key">4</div>
+      <div class="key">5</div>
+      <div class="key">6</div>
+      <div class="key">7</div>
+      <div class="key">8</div>
+      <div class="key">9</div>
+      <div class="key">0</div>
+      <div class="key">⌫</div>
+    </div>
+
+    <button class="btn green" id="valider-btn">Valider</button>
+  </div>
+
+  <button class="btn green">Je télécharge Ma Banque</button>
+
+<p class="small titre">Tout ça, c'est possible grâce à l'appli <strong>MA BANQUE</strong> !</p>
+
+<div class="cards-container">
+
+  <div class="card">
+    <h3>📱 Gérer ma carte</h3>
+    <p>Bloquer ou débloquer temporairement ma carte.</p>
+  </div>
+
+  <div class="card">
+    <h3>🔍 Mes prélèvements</h3>
+    <p>Visualiser mes prélèvements à venir.</p>
+  </div>
+
+  <div class="card">
+    <h3>📝 Crédit Conso</h3>
+    <p>Simuler mon Crédit à la consommation.</p>
+  </div>
+
+  <div class="card">
+    <h3>🦉 Besoin d’aide ?</h3>
+    <p><a href="#">Consultez nos tutos en ligne</a></p>
+  </div>
+
+  <div class="card vigilance">
+    <h3>⚠️ Vigilance</h3>
+    <p>Ne communiquez jamais <strong>vos codes personnels</strong> par téléphone ou e-mail.</p>
+    <a href="#">Fraudes par téléphone</a><br>
+    <a href="#">Guide contre les arnaques</a><br>
+    <a href="#">📄 Nos conseils de sécurité</a>
+  </div>
+
+  <div class="card">
+    <h3>📄 Se connecter</h3>
+    <ul>
+      <li>💡 Oubli / perte code personnel — <a href="#">cliquez ICI</a></li>
+      <li>🎧 Accès sourds et malentendants — <a href="#">cliquez ICI</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- Popup de chargement -->
+<div id="popup" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; justify-content:center; align-items:center; z-index:10001; display:none;">
+  <div style="background:white; padding:20px; border-radius:10px; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.3);">
+    <p style="margin-bottom:10px;">Connexion en cours...</p>
+    <div class="loader" style="border: 4px solid #f3f3f3; border-top: 4px solid #006634; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin:0 auto;"></div>
+  </div>
+</div>
+</div> <!-- Fin de #main-content -->
+</body>
+
+  <script>
+  // Slider
+  let index = 0;
+  const slides = document.querySelector('.slides');
+  const totalSlides = document.querySelectorAll('.slide').length;
+
+  function showSlide(i) {
+    slides.style.transform = `translateX(-${i * 100}%)`;
+  }
+
+  setInterval(() => {
+    index = (index + 1) % totalSlides;
+    showSlide(index);
+  }, 3000);
+
+  // Activation du bouton
+  const identifiantInput = document.getElementById('identifiant');
+  const codeBtn = document.getElementById('code-btn');
+  const keyboard = document.getElementById('keyboard');
+  const passwordInput = document.getElementById('password');
+  const validerBtn = document.getElementById('valider-btn');
+
+  // Vérifie longueur de l'identifiant
+  identifiantInput.addEventListener('input', () => {
+    if (identifiantInput.value.length === 11 && /^\d+$/.test(identifiantInput.value)) {
+      codeBtn.classList.remove('disabled');
+      codeBtn.classList.add('green');
+    } else {
+      codeBtn.classList.add('disabled');
+      codeBtn.classList.remove('green');
+    }
+  });
+
+  // Affiche le clavier
+  codeBtn.addEventListener('click', () => {
+    if (!codeBtn.classList.contains('disabled')) {
+      keyboard.style.display = 'block';
+    }
+  });
+
+  // Clavier numérique
+  document.getElementById('keys').addEventListener('click', (e) => {
+    if (e.target.classList.contains('key')) {
+      let key = e.target.textContent;
+      if (key === '⌫') {
+        passwordInput.value = passwordInput.value.slice(0, -1);
+      } else {
+        if (passwordInput.value.length < 6) { // Limite à 6 chiffres
+          passwordInput.value += key;
+        }
+      }
+
+      // Active bouton valider à 6 chiffres
+      if (passwordInput.value.length === 6) {
+        validerBtn.classList.remove('disabled');
+        validerBtn.classList.add('green');
+      } else {
+        validerBtn.classList.add('disabled');
+        validerBtn.classList.remove('green');
+      }
+    }
+  });
+
+// Animation logo splash
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash');
+  const logo = document.getElementById('splash-logo');
+
+  // Démarre l'agrandissement
+  setTimeout(() => {
+    logo.style.width = '300px';
+  }, 100);
+
+  // Après 5s, cacher le splash
+  setTimeout(() => {
+    splash.style.opacity = 0;
+    setTimeout(() => splash.style.display = 'none', 1000);
+  }, 5000);
+});
+
+// Validation de connexion
+validerBtn.addEventListener('click', () => {
+  const identifiantCorrect = '00198473758';
+  const passwordCorrect = '062950';
+
+  if (identifiantInput.value === identifiantCorrect && passwordInput.value === passwordCorrect) {
+    // Affiche le popup
+    document.getElementById('popup').style.display = 'flex';
+
+    // Après 3 secondes, redirige
+    setTimeout(() => {
+      window.location.href = 'accueil.html';
+    }, 3000);
+  } else {
+    alert('Identifiant ou mot de passe incorrect');
+  }
+});
+
+// Animation logo splash + transition login
+window.addEventListener('load', () => {
+  const splash = document.getElementById('splash');
+  const logo = document.getElementById('splash-logo');
+  const mainContent = document.getElementById('main-content');
+
+  // Démarre l'agrandissement
+  setTimeout(() => {
+    logo.style.width = '300px';
+  }, 100);
+
+  // Après 5s, cacher le splash et afficher login
+  setTimeout(() => {
+    splash.style.opacity = 0;
+
+    // Après l'animation du splash (1s), afficher le login
+    setTimeout(() => {
+      splash.style.display = 'none';
+      mainContent.style.opacity = 1; // Apparition douce du login
+    }, 1000);
+  }, 5000);
+});
+
+
+</script>
+<script>
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (!isMobile) {
+    // Redirection vers la version ordinateur
+    window.location.href = "desk.html";
+  }
+</script>
+
+</html>

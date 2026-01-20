@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Plafonds</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+      position: relative;
+    }
+
+    h2 {
+      color: #007e66;
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+   h1 {
+  font-size: 30px; /* Augmenté (avant tu avais 22px) */
+  margin-bottom: 20px;
+}
+
+
+    .account {
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .account-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .account-info span:first-child {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .account-info span:last-child {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .amount {
+      color: #007e66;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+   /* Barre de progression centrée */
+.progress-container {
+  background-color: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 7px; /* plus fine */
+  width: 60%; /* largeur réduite pour centrer */
+  margin: 10px auto; /* centré */
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #007e66;
+  width: 0%; /* Commence à 0% */
+  transition: width 0.5s ease;
+}
+
+    /* Croix retour */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 22px;
+      color: #007e66;
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+<body>
+
+<div>
+    <!-- Croix retour -->
+  <a href="accueil.html" class="close-btn"><i class="fas fa-times"></i></a>
+
+ <!-- Barre de progression centrée -->
+<div class="progress-container">
+  <div class="progress-bar"></div>
+</div>
+</div><br><br>
+
+
+  <h1><span style="color:#007e66;">Depuis <span style="color:black;">quel</span></span><br> compte ?</h1>
+
+  <h2>Scherer Nathalie</h2>
+  <div class="account" onclick="selectAccount()">
+    <div class="account-info">
+      <span>Compte courant</span>
+      <span>n°9048008492</span>
+    </div>
+    <div class="amount">+ 5 214 000,00 €</div>
+  </div>
+
+  
+
+<script>
+  // Quand la page est chargée, fade in
+  window.onload = () => {
+    document.body.style.opacity = 1;
+
+    // Barre de progression : démarre à 0%, reste à 0% au début
+    const progressBar = document.querySelector('.progress-bar');
+    progressBar.style.width = '0%'; // Début
+  };
+</script>
+
+<script>
+  // Quand la page est chargée, fade in
+  window.onload = () => {
+    document.body.style.opacity = 1;
+  };
+
+  // Fonction pour avancer la barre et aller à la page suivante
+  function selectAccount() {
+    // Animation progression
+    const progressBar = document.querySelector('.progress-bar');
+    progressBar.style.width = '50%';
+
+    // Attendre 0.8s pour voir la progression puis changer de page
+    setTimeout(() => {
+      window.location.href = 'virement-etape2.html'; // page suivante
+    }, 800);
+  }
+</script>
+
+
+</body>
+</html>

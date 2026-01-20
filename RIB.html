@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Éditer un RIB</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #D6EEF7;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h1 {
+      padding: 20px 16px 10px;
+      font-size: 22px;
+      font-weight: 300;
+    }
+
+    .speech-bubble {
+      position: relative;
+      margin: 0 auto;
+      background: white;
+      width: 80%;
+      height: 20px;
+      border-radius: 4px;
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+      border-top: 10px solid white;
+    }
+
+    .rib-container {
+      background-color: white;
+      margin: 30px auto;
+      width: 90%;
+      padding: 16px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      font-size: 14px;
+    }
+
+    .rib-container p {
+      margin: 8px 0;
+    }
+
+    .rib-container p span {
+      font-weight: bold;
+    }
+
+    .rib-container hr {
+      margin: 15px 0;
+      border: 0;
+      border-top: 1px solid #ccc;
+    }
+
+    .bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      border-top: 1px solid #ddd;
+      background-color: white;
+      height: 48px;
+      font-size: 16px;
+      z-index: 1000;
+    }
+
+    .bottom-bar div {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .pdf-btn {
+      color: #F4511E;
+      font-weight: bold;
+      border-right: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .share-btn {
+      color: #333;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        display: none; /* cache la page sur desktop/tablette */
+      }
+    }
+  </style>
+</head>
+<body>
+<div id="loader">
+  <p style="text-align: center; margin-top: 50vh; font-size: 16px; color: #007e66;">Chargement...</p>
+</div>
+<div id="main-content" style="display: none;">
+  <!-- ici commence tout le reste de ta page -->
+
+<h1 style="display: flex; align-items: center; gap: 12px;">
+  <a href="accueil.html" style="font-size: 26px; text-decoration: none; color: #007e66;">
+    <i class="fas fa-arrow-left"></i>
+  </a>
+  Éditer un RIB
+</h1>
+
+
+
+  <div class="speech-bubble"></div>
+
+  <div class="rib-container" id="rib-content">
+     <p><span>Titulaire</span><br>Scherer Nathalie <br> </p>
+
+   
+    <hr>
+    <p><span>Code Banque</span> 17806</p>
+    <p><span>Code Guichet</span> 00100</p>
+    <p><span>Numéro de Compte</span> 02365789876</p>
+    <p><span>Clé RIB</span> 89</p>
+    <br>
+    <p><span>IBAN (International Bank Account Number)</span><br>GR16 1780 6001 0012 3456 7890 189</p>
+    <p><span>Code BIC (SWIFT)</span><br>AGRIF1XXX </p>
+     <p><span>Domiciliation</span><br>EUROBANK.</p> <br><br>
+<center><p >Remettez ce relevé à tout autre organisme ayant besoin de connaître vos références bancaires pour la domiciliation de vos virements ou de prélèvements à votre compte. Vous éviterez ainsi des erreurs ou des retards d’exécution.</p></center>
+  </div>
+  
+
+
+  <div class="bottom-bar">
+    <div class="pdf-btn" onclick="downloadRIB()">PDF</div>
+    <div class="share-btn">Partager</div>
+  </div>
+
+  <script>
+    function downloadRIB() {
+      const element = document.getElementById("rib-content");
+      const opt = {
+        margin:       0.3,
+        filename:     'RIB_CA.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+      };
+      html2pdf().from(element).set(opt).save();
+    }
+  </script>
+  <script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("loader").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+    }, 2000); // 2 secondes
+  });
+</script>
+<script>
+    function toggleDetails(element) {
+      const next = element.nextElementSibling;
+      if (next && next.classList.contains('details')) {
+        next.style.display = next.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  </script>
+  <script>
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (!isMobile) {
+    // Redirection vers la version ordinateur
+    window.location.href = "desk.html";
+  }
+</script>
+
+</body>
+</html>

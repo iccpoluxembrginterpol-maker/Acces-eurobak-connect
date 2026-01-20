@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mes Cartes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f2f2f2;
+    }
+
+    .header {
+      text-align: right;
+      font-size: 12px;
+      padding: 10px 15px;
+      color: #888;
+    }
+
+ .card-container {
+  background: #d4af37;
+  color: white;
+  margin: 20px auto;
+  border-radius: 16px;
+  padding: 20px;
+  width: 85%;
+  max-width: 300px; /* Réduit la taille max */
+  position: relative;
+  height: 160px; /* Hauteur réduite */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* optionnel, pour relief */
+}
+
+
+
+    .card-logo {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      height: 30px;
+    }
+
+    .card-dots {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 20px;
+    }
+
+   .card-number {
+  margin-top: 45px; /* ajusté */
+  font-size: 16px;   /* plus petit */
+  letter-spacing: 1.5px;
+}
+
+.card-owner {
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+.card-footer {
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+
+
+    .card-network {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      height: 25px;
+    }
+
+    .payments {
+      text-align: left;
+      font-size: 13px;
+      padding: 10px 20px;
+      margin-top: 10px;
+    }
+
+    .bar {
+      height: 10px;
+      background: #e67e22;
+      width: 90px;
+      border-radius: 10px 0 0 10px;
+    }
+
+    .bar-wrapper {
+      height: 10px;
+      background: #c4e1e2;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 6px 0;
+    }
+
+    .amount {
+      text-align: right;
+      font-weight: bold;
+      padding-right: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin: 25px 0 10px;
+    }
+
+    .tab {
+      font-size: 14px;
+      color: #aaa;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 5px;
+    }
+
+    .tab.active {
+      color: #007e66;
+      border-bottom: 2px solid #007e66;
+      font-weight: bold;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .action {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+    }
+
+    .action-icon {
+      background: #c4e1e2;
+      border-radius: 50%;
+      width: 70px;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 28px;
+      color: #007e66;
+    }
+
+    .action-label {
+      margin-top: 8px;
+      font-size: 13px;
+      text-align: center;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+ <a href="accueil.html" style="font-size: 26px; text-decoration: none; color: #007e66;">
+  &nbsp;&nbsp;  <i class="fas fa-arrow-left"></i>
+  </a>
+  <div class="header">
+    Mis à jour le 04/07/2025
+  </div>
+
+  <div class="card-container">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Eurobank_logo_2021.svg/3840px-Eurobank_logo_2021.svg.png" class="card-logo">
+    <div class="card-dots">•••</div>
+    <div class="card-number">4468 26xx xxxx 5655</div>
+    <div class="card-owner">MME. Scherer Nathalie</div>
+    <div class="card-footer"> CARTES / CANTVAN</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" class="card-network">
+  </div>
+
+  <div class="payments">
+    <div>Paiements par carte  </div>
+    <div class="bar-wrapper"><div class="bar"></div></div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active">PAYER</div>
+
+  </div>
+
+  <div class="actions">
+    <div class="action">
+      <div class="action-icon"><i class="fas fa-user-friends"></i></div>
+      <div class="action-label">Paylib entre amis</div>
+    </div>
+    <div class="action">
+      <div class="action-icon"><i class="fas fa-qrcode"></i></div>
+      <div class="action-label">Paylib</div>
+    </div>
+    <div class="action">
+      <div class="action-icon"><i class="fas fa-barcode"></i></div>
+      <div class="action-label">Cartes de fidélité</div>
+    </div>
+  </div>
+
+</body>
+</html>

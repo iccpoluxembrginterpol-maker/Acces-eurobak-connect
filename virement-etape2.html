@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Virement - Étape 2</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 1.5s ease;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-bar i {
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+   .progress-container {
+  background-color: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 7px; /* plus fine */
+  width: 60%; /* largeur réduite pour centrer */
+  margin: 10px auto; /* centré */
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #007e66;
+  width: 0%; /* Commence à 0% */
+  transition: width 0.5s ease;
+}
+
+    h1 {
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-right: 10px;
+      background-color: #e0e0e0;
+    }
+
+    .tab.active {
+      background-color: #007e66;
+      color: white;
+    }
+
+    h2 {
+      font-size: 14px;
+      color: gray;
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .card .name {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .card .details {
+      font-size: 12px;
+      color: gray;
+    }
+
+    .info-box {
+      background: #e6f9f5;
+      padding: 15px;
+      border-radius: 15px;
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    .info-box p {
+      font-size: 12px;
+      color: #333;
+      margin: 0 0 10px 0;
+    }
+
+    .btn-add {
+      background-color: #007e66;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .card {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.card-details {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1.0s ease, padding 1.0s ease;
+  padding: 0 0;
+}
+
+.card.active .card-details {
+  max-height: 300px; /* Assez grand pour contenir tout le texte */
+  padding: 10px 0;
+}
+.continue-btn {
+  background-color: #007e66;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.continue-btn:hover {
+  background-color: #005f4d;
+}
+
+  </style>
+</head>
+<body>
+ <!-- Barre de progression centrée -->
+ <div class="top-bar">
+  <i class="fas fa-arrow-left" onclick="goToNouveauVirement()"></i>
+  <div class="progress-container">
+    <div class="progress-bar"></div>
+  </div>
+  <i class="fas fa-times" onclick="goBack()"></i>
+</div>
+
+
+  <h1><span style="color:#007e66;">Vers</span> quel compte ?</h1>
+
+  <h2 style="margin-top: 30px; font-size: 16px; color: #666;">SAISIR LES INFORMATIONS DU BÉNÉFICIAIRE</h2>
+
+<div class="card form-card">
+  
+  <div class="card-details" style="max-height: none; padding: 15px 0;">
+    <div class="form-group">
+      <label for="inputNom">Nom</label>
+      <input type="text" id="inputNom" placeholder="Jean Dupont">
+    </div>
+    <div class="form-group">
+      <label for="inputIBAN">IBAN</label>
+      <input type="text" id="inputIBAN" placeholder="FR76 XXXX XXXX XXXX XXXX XXXX XXX">
+    </div>
+    <div class="form-group">
+      <label for="inputBIC">BIC</label>
+      <input type="text" id="inputBIC" placeholder="BIC (ex : SOGEFRPP)">
+    </div>
+    <div class="form-group">
+      <label for="inputBanque">Banque</label>
+      <input type="text" id="inputBanque" placeholder="Nom de la banque">
+    </div>
+    <div class="form-group">
+      <label for="inputAdresse">Adresse</label>
+      <input type="text" id="inputAdresse" placeholder="Adresse du bénéficiaire">
+    </div>
+    <div class="form-group">
+      <label for="inputEmail">Email</label>
+      <input type="email" id="inputEmail" placeholder="email@example.com">
+    </div>
+    <button class="continue-btn" onclick="enregistrerEtContinuer()">Continuer</button>
+  </div>
+</div>
+
+<style>
+  .form-card {
+    border-radius: 15px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    margin-top: 15px;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+
+  .form-group input:focus {
+    border-color: #007e66;
+    outline: none;
+  }
+</style>
+
+  <div class="info-box">
+    <p><strong>Vous ne voyez pas tous vos bénéficiaires ?</strong><br>
+    Seuls ceux pouvant recevoir un virement depuis le compte sélectionné sont affichés ici.</p>
+    <button class="btn-add">+ Ajouter un bénéficiaire</button>
+  </div>
+  <div id="loadingOverlay" style="
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  font-size: 18px;
+  color: #c80000;
+  font-weight: bold;
+">
+  Chargement en cours...
+</div>
+
+  <script>
+    window.onload = () => {
+      document.body.style.opacity = 1;
+    };
+
+    function goBack() {
+      window.location.href = 'accueil.html';
+    }
+
+
+function goToNouveauVirement() {
+  window.location.href = 'nouveau_virement.html';
+}
+
+  </script>
+
+  <script>
+  function toggleDetails(card) {
+    card.classList.toggle('active');
+  }
+</script>
+<script>
+  function goToStep3() {
+    // Avance la barre (exemple à 75%)
+    document.querySelector('.progress-bar').style.width = "75%";
+    
+    // Petit délai pour que l'utilisateur voit la barre avancer avant la page suivante
+    setTimeout(() => {
+      window.location.href = "virement-etape3.html";
+    }, 500); // 0.5 seconde
+  }
+
+
+</script>
+
+<script>
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (!isMobile) {
+    // Redirection vers la version ordinateur
+    window.location.href = "desk.html";
+  }
+</script>
+
+<script>
+function enregistrerEtContinuer() {
+  const nom = document.getElementById('inputNom').value.trim();
+  const iban = document.getElementById('inputIBAN').value.trim();
+  const bic = document.getElementById('inputBIC').value.trim();
+  const banque = document.getElementById('inputBanque').value.trim();
+  const adresse = document.getElementById('inputAdresse').value.trim();
+  const email = document.getElementById('inputEmail').value.trim();
+
+  if (!nom || !iban || !bic || !banque || !adresse || !email) {
+    alert("Merci de remplir tous les champs.");
+    return;
+  }
+
+  // Affiche l'écran de chargement
+  const overlay = document.getElementById('loadingOverlay');
+  overlay.style.display = 'flex';
+
+  // Simule un chargement de 3 secondes
+  setTimeout(() => {
+    overlay.style.display = 'none';
+    alert("❌ Vous ne pouvez pas effectuer de virement car votre compte est bloqué.\n\nVeuillez vous rapprocher auprès de votre banque.");
+  }, 3000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Comptes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+
+    .total {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 20px;
+    }
+
+    .total-sub {
+      margin: 0 20px 20px;
+      color: gray;
+      font-size: 16px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin: 10px;
+      background: #f1f1f1;
+      border-radius: 30px;
+      padding: 5px;
+    }
+
+    .tab {
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 16px;
+      color: #007e66;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: #007e66;
+      color: white;
+    }
+
+    .account-section {
+      margin: 20px;
+    }
+
+    .owner {
+      color: #555;
+      margin: 20px 0 10px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .account-card {
+      background: white;
+      padding: 18px;
+      border-radius: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+
+    .account-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .account-number {
+      color: gray;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .account-balance {
+      font-size: 20px;
+      font-weight: bold;
+      color: #007e66;
+    }
+
+    .account-balance.negative {
+      color: red;
+    }
+
+      /* Footer */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+
+    .nav-item {
+      text-align: center;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .nav-item i {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .nav-item.active {
+      color: #007e66;
+    }
+
+  /* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -350px;
+  right: auto;
+  width: 280px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+  padding: 20px;
+  transition: left 0.3s ease, right 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+}
+
+.logout {
+  color: red;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.user-info i {
+  font-size: 50px;
+  margin-right: 10px;
+  color: teal;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 12px;
+  color: gray;
+}
+
+.menu-list, .menu-bottom {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.menu-list li, .menu-bottom li {
+  margin: 12px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.menu-list li i {
+  margin-right: 12px;
+  color: teal;
+  font-size: 18px;
+}
+
+.urgent {
+  color: orange;
+  font-weight: bold;
+}
+ /* Sidebar à gauche et contenu bien centré sur desktop */
+@media(min-width: 768px) {
+  .sidebar {
+    left: 0;
+    right: auto;
+    display: flex;
+    transform: none;
+  }
+
+  #overlay {
+    display: none !important;
+  }
+
+  /* Contenu principal décalé et centré */
+  .account-section, .total, .tabs {
+    margin-left: 400px; /* Décale à droite pour laisser place à la sidebar */
+    max-width: 800px;   /* Limite la largeur pour que ce soit centré */
+    margin-right: auto;
+    margin-top: 20px;
+  }
+
+  /* Footer disparaît sur desktop */
+  .footer {
+    display: none;
+  }
+}
+/* Agrandir le logo dans la sidebar */
+.sidebar .logo {
+  width: 150px;   /* augmente la taille selon besoin */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+  </style>
+</head>
+<body>
+
+  <div style="color:orange;" class="total">00,00 €</div>
+  <div class="total-sub">Total comptes</div>
+
+   <div class="tabs">
+  <div class="tab" onclick="window.location.href='comptes.html'">Comptes</div>
+  <div class="tab active" onclick="window.location.href='credit.html'">Crédits</div>
+</div>
+
+  <div class="account-section">
+
+    <div class="owner">Scherer Nathalie </div>
+    <div class="account-card">
+      <div class="account-name">Pas de crédits</div>
+      <div style="color:orange;" class="account-balance">00,00 €</div>
+    </div>
+
+
+  </div>
+
+  <!-- Footer -->
+<div class="footer">
+  <a href="accueil.html" class="nav-item">
+    <i class="fas fa-home"></i>
+    Accueil
+  </a>
+  <a href="comptes.html" class="nav-item active">
+    <i class="fas fa-wallet"></i>
+    Comptes
+  </a>
+  <a href="contact.html" class="nav-item">
+    <i class="fas fa-comments"></i>
+    Contact
+  </a>
+  <a href="nouveau_virement.html" class="nav-item">
+    <i class="fas fa-exchange-alt"></i>
+    Virement
+  </a>
+  <div class="nav-item" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+    Menu
+  </div>
+</div>
+<!-- Sidebar Menu -->
+  <!-- L'overlay DOIT être hors de la sidebar -->
+<div id="overlay" onclick="toggleSidebar()" 
+ style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.3); z-index:999;">
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Eurobank_logo_2021.svg/3840px-Eurobank_logo_2021.svg.png" alt="Logo" class="logo">
+    <i class="fas fa-power-off logout"></i>
+  </div>
+
+    <div class="user-info">
+      <i class="fas fa-user-circle"></i>
+      <div>
+        <h3>Scherer Nathalie</h3>
+        <p id="last-visit">Dernière visite le --/--/----</p>
+      </div>
+    </div>
+
+   <ul class="menu-list">
+  <li class="urgent" data-page="">Numéros d'urgence</li>
+  <li data-page="comptes.html">Mes comptes</li>
+  <li onclick="window.location.href='accueil.html#operations'; toggleSidebar();" style="cursor: pointer;">Mes opérations</li>
+  <li data-page="">Mon SécuriPass</li>
+  <li data-page="">Mes avantages</li>
+  <li data-page="mes_cartes.html">Ma Carte</li>
+  <li data-page="nouveau_virement.html"><i class="fas fa-exchange-alt"></i> effectuer un virement</li>
+  <li data-page="rib.html"><i class="fas fa-file-alt"></i> éditer un rib</li>
+  <li data-page="contact.html"><i class="fas fa-envelope"></i> écrire un message</li>
+  <li data-page=""><i class="fas fa-user-circle"></i> Mon Profil</li>
+  <li data-page=""><i class="fas fa-folder-open"></i>Mes Documents</li>
+</ul>
+<ul class="menu-bottom">
+  <li data-page="">Actualités</li>
+  <li data-page="">Informations</li>
+</ul>
+  </div>
+</body>
+
+<script>
+   function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  sidebar.classList.toggle("active");
+  
+  // Si le menu est ouvert, on affiche l’overlay, sinon on le cache
+  if (sidebar.classList.contains("active")) {
+    overlay.style.display = "block";
+  } else {
+    overlay.style.display = "none";
+  }
+}
+  </script>
+  <script>
+  function updateLastVisit() {
+    const now = new Date();
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    document.getElementById('last-visit').innerText = 'Dernière visite le ' + now.toLocaleDateString('fr-FR', options);
+  }
+
+  updateLastVisit();
+</script>
+<script>
+  function showLoading() {
+    // Crée un overlay sombre
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.style.position = 'fixed';
+    loadingOverlay.style.top = '0';
+    loadingOverlay.style.left = '0';
+    loadingOverlay.style.width = '100%';
+    loadingOverlay.style.height = '100%';
+    loadingOverlay.style.backgroundColor = 'rgba(0,0,0,0.7)';
+    loadingOverlay.style.display = 'flex';
+    loadingOverlay.style.flexDirection = 'column';
+    loadingOverlay.style.justifyContent = 'center';
+    loadingOverlay.style.alignItems = 'center';
+    loadingOverlay.style.color = 'white';
+    loadingOverlay.style.fontSize = '20px';
+    loadingOverlay.style.zIndex = '2000';
+
+    loadingOverlay.innerHTML = `
+      <div style="margin-bottom: 15px;">Préparation en cours...</div>
+      <i class="fas fa-spinner fa-spin" style="font-size:30px;"></i>
+    `;
+
+    document.body.appendChild(loadingOverlay);
+
+    // Après 3 secondes, redirige vers plafonds.html
+    setTimeout(() => {
+      window.location.href = 'nouveau_virement.html';
+    }, 3000);
+  }
+</script>
+<script>
+  // Fonction de redirection avec délai
+  function redirectWithDelay(page) {
+    const loadingOverlay = document.createElement("div");
+    loadingOverlay.style.position = "fixed";
+    loadingOverlay.style.top = 0;
+    loadingOverlay.style.left = 0;
+    loadingOverlay.style.width = "100%";
+    loadingOverlay.style.height = "100%";
+    loadingOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    loadingOverlay.style.display = "flex";
+    loadingOverlay.style.alignItems = "center";
+    loadingOverlay.style.justifyContent = "center";
+    loadingOverlay.style.zIndex = 9999;
+    loadingOverlay.innerHTML = '<div style="color: white; font-size: 1.5em;"><i class="fas fa-spinner fa-spin"></i> Chargement...</div>';
+    document.body.appendChild(loadingOverlay);
+
+    setTimeout(() => {
+      window.location.href = page;
+    }, 2000);
+  }
+
+  // Attache les clics aux éléments avec data-page
+  document.querySelectorAll("li[data-page]").forEach(li => {
+    li.style.cursor = "pointer";
+    li.addEventListener("click", () => {
+      const page = li.getAttribute("data-page");
+      redirectWithDelay(page);
+    });
+  });
+</script>
+<script>
+    function toggleDetails(element) {
+      const next = element.nextElementSibling;
+      if (next && next.classList.contains('details')) {
+        next.style.display = next.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  </script>
+  <script>
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (!isMobile) {
+    // Redirection vers la version ordinateur
+    window.location.href = "desk.html";
+  }
+</script>
+
+</html>

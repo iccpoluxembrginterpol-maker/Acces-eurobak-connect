@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    .sos {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #eee;
+      color: #007e66;
+      font-weight: bold;
+      border-radius: 20px;
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .call-block {
+      display: flex;
+      align-items: center;
+    }
+
+    .call-icon {
+      background: #007e66;
+      color: white;
+      border-radius: 15px;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 26px;
+      margin-right: 18px;
+    }
+
+    .call-text {
+      font-size: 16px;
+      color: gray;
+    }
+
+    .call-name {
+      font-weight: bold;
+      font-size: 20px;
+      color: #007e66;
+      margin-top: 3px;
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 25px;
+    }
+
+    .option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+    }
+
+    .option i {
+      font-size: 28px;
+      margin-bottom: 8px;
+      color: #007e66;
+    }
+
+    .section-title {
+      color: #666;
+      font-size: 14px;
+      margin: 25px 0 15px;
+      font-weight: bold;
+    }
+
+    .message {
+      background: #e6f7f4;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 15px;
+      position: relative;
+    }
+
+    .message-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .message-sub {
+      font-size: 14px;
+      color: gray;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 18px;
+      right: 18px;
+    }
+
+    .clip {
+      position: absolute;
+      bottom: 18px;
+      right: 18px;
+      color: #007e66;
+      font-size: 18px;
+    }
+
+    .date {
+      font-size: 14px;
+      color: gray;
+      margin: 25px 0;
+    }
+
+ /* Footer nav */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: white;
+      border-top: 1px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+    }
+
+    .footer .nav-item {
+      text-align: center;
+      color: #555;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .footer .nav-item i {
+      font-size: 20px;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .footer .nav-item.active {
+      color: #00796b;
+    }
+   /* Sidebar styles */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -350px; /* au lieu de -350px */
+  width: 280px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2); /* plus doux */
+  padding: 20px;
+  transition: left 0.3s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 50px;
+}
+
+.logout {
+  color: red;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.user-info i {
+  font-size: 50px;
+  margin-right: 10px;
+  color: teal;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 12px;
+  color: gray;
+}
+
+.menu-list, .menu-bottom {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.menu-list li, .menu-bottom li {
+  margin: 12px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.menu-list li i {
+  margin-right: 12px;
+  color: teal;
+  font-size: 18px;
+}
+
+.urgent {
+  color: orange;
+  font-weight: bold;
+}
+    /* Cacher sidebar sur desktop */
+    @media(min-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+    }
+    .menu-list li:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+    /* Messages non lus */
+.message {
+  background: #e6f7f4;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+/* Messages déjà lus */
+.message.lu {
+  background: #f2f2f2; /* plus gris, pour montrer que c'est lu */
+}
+
+/* Le point rouge (non lu) */
+.dot {
+  width: 12px;
+  height: 12px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+}
+
+/* Icône trombone */
+.clip {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  color: #007e66;
+  font-size: 18px;
+}
+/* Messages */
+.message {
+  background: #e6f7f4;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 15px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Message LU */
+.message.lu {
+  background: #f2f2f2;
+}
+
+/* Le point rouge (non lu) */
+.dot {
+  width: 12px;
+  height: 12px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+}
+
+/* Icône trombone */
+.clip {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  color: #007e66;
+  font-size: 18px;
+}
+
+/* Popup */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  width: 80%;
+  max-width: 400px;
+  position: relative;
+}
+
+.popup-content h3 {
+  margin-bottom: 15px;
+}
+
+.popup-content p {
+  color: #555;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Slide */
+.message.swiped {
+  transform: translateX(-80px);
+}
+
+/* Bouton slide */
+.swipe-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #007e66;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  cursor: pointer;
+  display: none;
+}
+
+.popup-rdv {
+  padding: 25px;
+  border-radius: 18px;
+  background: #ffffff;
+  width: 90%;
+  max-width: 400px;
+  text-align: left;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  position: relative;
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.rdv-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.rdv-label {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.rdv-btn {
+  width: 100%;
+  padding: 12px;
+  background: #007e66;
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.rdv-btn:hover {
+  background: #006a57;
+}
+/* Agrandir le logo dans la sidebar */
+.sidebar .logo {
+  width: 120px;   /* augmente la taille selon besoin */
+  height: auto;
+  margin-bottom: 10px;
+}
+
+
+  </style>
+</head>
+<body>
+
+
+
+  <div class="sos">sos</div>
+
+  <h1>Contact</h1>
+
+  <div class="card">
+    <div class="call-block">
+     <a style="text-decoration: none;">
+  <div class="call-icon" title="Envoyer un mail">
+    <i class="fas fa-pencil-alt"></i>
+  </div>
+</a>
+
+      <div>
+        <div class="call-text"> Mon gestionnaire</div>
+        <div class="call-name">Jean-Michel CAUVEZ</div>
+        <div class="call-text"></div>
+      </div>
+    </div>
+
+    <div class="options">
+      
+      <div class="option" onclick="ouvrirPopupRDV()">
+  <i class="fas fa-calendar-alt"></i>
+  Prendre un<br>rendez-vous
+</div>
+
+     <div class="option" onclick="ouvrirPopupAgence()">
+  <i class="fas fa-building"></i>
+  Voir le détail<br>agence
+</div>
+
+    </div>
+  </div>
+
+<div class="section-title">MES DERNIERS MESSAGES</div>
+
+
+  <div class="no-transaction-card">
+    <i class="fas fa-folder-open"></i>
+    <h3>Aucune message </h3>
+    <p>Vous n'avez aucun message.</p>
+  </div>
+</div>
+
+<style>
+  .no-transaction-card {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    margin: 20px;
+  }
+
+  .no-transaction-card i {
+    font-size: 40px;
+    color: #ccc;
+    margin-bottom: 15px;
+  }
+
+  .no-transaction-card h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .no-transaction-card p {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+  }
+</style>
+</div>
+
+
+
+
+<!-- Le popup -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="fermerPopup()">&times;</span>
+    <h3 id="popup-title"></h3>
+    <p id="popup-text"></p>
+  </div>
+</div>
+
+<!-- Popup Agence -->
+<div id="popup-agence" class="popup">
+  <div class="popup-content">
+    <span class="close" onclick="fermerPopupAgence()">&times;</span>
+    <h3>Agence EUROBANK</h3>
+    <p><strong>Adresse :</strong><br>
+      Othonos 8, City centre,<br>
+       10557 Athens. <br><br>
+      <strong>Horaires :</strong><br>
+      Lundi à Vendredi : 9h - 12h / 14h - 17h30<br>
+      Samedi & Dimanche : Fermé
+    </p>
+  </div>
+</div>
+
+<!-- Popup Rendez-vous -->
+<div id="popup-rdv" class="popup">
+  <div class="popup-content popup-rdv">
+    <span class="close" onclick="fermerPopupRDV()">&times;</span>
+    <h3>Prendre un rendez-vous</h3>
+    <form id="rdv-form" onsubmit="event.preventDefault(); validerRDV();">
+      <input type="text" placeholder="Nom complet" required class="rdv-input">
+      <input type="email" placeholder="Adresse email" required class="rdv-input">
+      <input type="tel" placeholder="Téléphone" required class="rdv-input">
+      <label for="date" class="rdv-label">Date souhaitée</label>
+      <input type="date" id="date" required class="rdv-input">
+      <button type="submit" class="rdv-btn">Valider mon rendez-vous</button>
+    </form>
+  </div>
+</div>
+
+
+ <!-- Footer -->
+<div class="footer">
+  <a href="accueil.html" class="nav-item">
+    <i class="fas fa-home"></i>
+    Accueil
+  </a>
+  <a href="comptes.html" class="nav-item">
+    <i class="fas fa-wallet"></i>
+    Comptes
+  </a>
+  <a href="contact.html" class="nav-item active">
+    <i class="fas fa-comments"></i>
+    Contact
+  </a>
+  <a href="nouveau_virement.html" class="nav-item">
+    <i class="fas fa-exchange-alt"></i>
+    Virement
+  </a>
+  <div class="nav-item" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
+    Menu
+  </div>
+</div>
+
+
+  <!-- Sidebar Menu -->
+  <!-- L'overlay DOIT être hors de la sidebar -->
+<div id="overlay" onclick="toggleSidebar()" 
+ style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.3); z-index:999;">
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+  <div class="sidebar-header">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Eurobank_logo_2021.svg/3840px-Eurobank_logo_2021.svg.png" alt="Logo" class="logo">
+    <i class="fas fa-power-off logout"></i>
+  </div>
+
+    <div class="user-info">
+      <i class="fas fa-user-circle"></i>
+      <div>
+        <h3>Scherer Nathalie</h3>
+        <p id="last-visit">Dernière visite le --/--/----</p>
+      </div>
+    </div>
+
+      <ul class="menu-list">
+  <li class="urgent" data-page="">Numéros d'urgence</li>
+  <li data-page="comptes.html">Mes comptes</li>
+  <li onclick="window.location.href='accueil.html#operations'; toggleSidebar();" style="cursor: pointer;">Mes opérations</li>
+  <li data-page="">Mon SécuriPass</li>
+  <li data-page="">Mes avantages</li>
+  <li data-page="mes_cartes.html">Ma Carte</li>
+  <li data-page="nouveau_virement.html"><i class="fas fa-exchange-alt"></i> effectuer un virement</li>
+  <li data-page="rib.html"><i class="fas fa-file-alt"></i> éditer un rib</li>
+  <li data-page="contact.html"><i class="fas fa-envelope"></i> écrire un message</li>
+  <li data-page=""><i class="fas fa-user-circle"></i> Mon Profil</li>
+  <li data-page=""><i class="fas fa-folder-open"></i>Mes Documents</li>
+</ul>
+<ul class="menu-bottom">
+  <li data-page="">Actualités</li>
+  <li data-page="">Informations</li>
+</ul>
+  </div>
+
+</body>
+
+<script>
+  // Ouvrir popup
+  function ouvrirMessage(elem, titre, texte) {
+    document.getElementById('popup-title').innerText = titre;
+    document.getElementById('popup-text').innerText = texte;
+    document.getElementById('popup').style.display = 'flex';
+
+    // Marque comme lu automatiquement
+    elem.classList.add('lu');
+    let dot = elem.querySelector('.dot');
+    if (dot) dot.remove(); // Supprimer le point rouge
+  }
+
+  // Fermer popup
+  function fermerPopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+
+  // Gestion du swipe (glissement)
+  let startX = 0;
+
+  document.querySelectorAll('.message').forEach(msg => {
+    msg.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+    });
+
+    msg.addEventListener('touchmove', e => {
+      let diff = e.touches[0].clientX - startX;
+      if (diff < -30) {
+        msg.classList.add('swiped');
+        showSwipeBtn(msg);
+      }
+      if (diff > 30) {
+        msg.classList.remove('swiped');
+        hideSwipeBtn(msg);
+      }
+    });
+  });
+
+  // Bouton slide
+  function showSwipeBtn(msg) {
+    if (!msg.querySelector('.swipe-btn')) {
+      let btn = document.createElement('div');
+      btn.className = 'swipe-btn';
+      btn.innerText = msg.classList.contains('lu') ? 'Non lu' : 'Lu';
+      btn.onclick = function(e) {
+        e.stopPropagation(); // Evite de déclencher le popup
+        toggleLu(msg);
+      };
+      msg.appendChild(btn);
+    }
+    msg.querySelector('.swipe-btn').style.display = 'block';
+  }
+
+  function hideSwipeBtn(msg) {
+    let btn = msg.querySelector('.swipe-btn');
+    if (btn) btn.style.display = 'none';
+  }
+
+  // Marquer comme lu/non lu
+  function toggleLu(msg) {
+    msg.classList.toggle('lu');
+
+    // Supprime ou ajoute le point rouge
+    if (msg.classList.contains('lu')) {
+      let dot = msg.querySelector('.dot');
+      if (dot) dot.remove();
+    } else {
+      if (!msg.querySelector('.dot')) {
+        let dot = document.createElement('div');
+        dot.className = 'dot';
+        msg.appendChild(dot);
+      }
+    }
+
+    // Change le texte du bouton
+    let btn = msg.querySelector('.swipe-btn');
+    if (btn) btn.innerText = msg.classList.contains('lu') ? 'Non lu' : 'Lu';
+
+    // Replie le message
+    msg.classList.remove('swiped');
+    hideSwipeBtn(msg);
+  }
+</script>
+<script>
+   function toggleSidebar() {
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  sidebar.classList.toggle("active");
+  
+  // Si le menu est ouvert, on affiche l’overlay, sinon on le cache
+  if (sidebar.classList.contains("active")) {
+    overlay.style.display = "block";
+  } else {
+    overlay.style.display = "none";
+  }
+}
+  </script>
+  <script>
+  function updateLastVisit() {
+    const now = new Date();
+    const options = {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    };
+    document.getElementById('last-visit').innerText = 'Dernière visite le ' + now.toLocaleDateString('fr-FR', options);
+  }
+
+  updateLastVisit();
+</script>
+<script>
+  function showLoading() {
+    // Crée un overlay sombre
+    const loadingOverlay = document.createElement('div');
+    loadingOverlay.style.position = 'fixed';
+    loadingOverlay.style.top = '0';
+    loadingOverlay.style.left = '0';
+    loadingOverlay.style.width = '100%';
+    loadingOverlay.style.height = '100%';
+    loadingOverlay.style.backgroundColor = 'rgba(0,0,0,0.7)';
+    loadingOverlay.style.display = 'flex';
+    loadingOverlay.style.flexDirection = 'column';
+    loadingOverlay.style.justifyContent = 'center';
+    loadingOverlay.style.alignItems = 'center';
+    loadingOverlay.style.color = 'white';
+    loadingOverlay.style.fontSize = '20px';
+    loadingOverlay.style.zIndex = '2000';
+
+    loadingOverlay.innerHTML = `
+      <div style="margin-bottom: 15px;">Préparation en cours...</div>
+      <i class="fas fa-spinner fa-spin" style="font-size:30px;"></i>
+    `;
+
+    document.body.appendChild(loadingOverlay);
+
+    // Après 3 secondes, redirige vers plafonds.html
+    setTimeout(() => {
+      window.location.href = 'nouveau_virement.html';
+    }, 3000);
+  }
+</script>
+<script>
+  // Fonction de redirection avec délai
+  function redirectWithDelay(page) {
+    const loadingOverlay = document.createElement("div");
+    loadingOverlay.style.position = "fixed";
+    loadingOverlay.style.top = 0;
+    loadingOverlay.style.left = 0;
+    loadingOverlay.style.width = "100%";
+    loadingOverlay.style.height = "100%";
+    loadingOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+    loadingOverlay.style.display = "flex";
+    loadingOverlay.style.alignItems = "center";
+    loadingOverlay.style.justifyContent = "center";
+    loadingOverlay.style.zIndex = 9999;
+    loadingOverlay.innerHTML = '<div style="color: white; font-size: 1.5em;"><i class="fas fa-spinner fa-spin"></i> Chargement...</div>';
+    document.body.appendChild(loadingOverlay);
+
+    setTimeout(() => {
+      window.location.href = page;
+    }, 2000);
+  }
+
+  // Attache les clics aux éléments avec data-page
+  document.querySelectorAll("li[data-page]").forEach(li => {
+    li.style.cursor = "pointer";
+    li.addEventListener("click", () => {
+      const page = li.getAttribute("data-page");
+      redirectWithDelay(page);
+    });
+  });
+</script>
+<script>
+  function ouvrirPopupAgence() {
+    document.getElementById('popup-agence').style.display = 'flex';
+  }
+
+  function fermerPopupAgence() {
+    document.getElementById('popup-agence').style.display = 'none';
+  }
+</script>
+<script>
+  function ouvrirPopupRDV() {
+    document.getElementById('popup-rdv').style.display = 'flex';
+  }
+
+  function fermerPopupRDV() {
+    document.getElementById('popup-rdv').style.display = 'none';
+  }
+
+  function validerRDV() {
+    const rdvForm = document.getElementById('rdv-form');
+    const rdvPopup = document.querySelector('#popup-rdv .popup-content');
+
+    rdvPopup.innerHTML = `
+      <div style="text-align:center; font-size:16px; color:#007e66;">
+        <i class="fas fa-spinner fa-spin" style="font-size:28px;"></i><br><br>
+        Traitement de votre demande...
+      </div>
+    `;
+
+    setTimeout(() => {
+      rdvPopup.innerHTML = `
+        <span class="close" onclick="fermerPopupRDV()">&times;</span>
+        <h3>Rendez-vous confirmé</h3>
+        <p style="color:#333;">Votre rendez-vous a bien été enregistré.<br>
+        Veuillez vous présenter à l'agence à la date indiquée.</p>
+        <button onclick="fermerPopupRDV()" class="rdv-btn" style="margin-top:20px;">OK</button>
+      `;
+    }, 1000);
+  }
+</script>
+<script>
+    function toggleDetails(element) {
+      const next = element.nextElementSibling;
+      if (next && next.classList.contains('details')) {
+        next.style.display = next.style.display === 'block' ? 'none' : 'block';
+      }
+    }
+  </script>
+  <script>
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+  if (!isMobile) {
+    // Redirection vers la version ordinateur
+    window.location.href = "desk.html";
+  }
+</script>
+
+
+
+</html>

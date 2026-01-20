@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Récapitulatif</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .top-bar i {
+      font-size: 20px;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin: 20px 0;
+    }
+
+    .amount-display {
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .amount-display i {
+      font-size: 24px;
+      color: #007e66;
+      margin-right: 10px;
+    }
+
+    .recap-block {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      position: relative;
+    }
+
+    .recap-block .edit-icon {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .recap-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .recap-sub {
+      color: #666;
+      font-size: 14px;
+    }
+
+    .solde {
+      margin-top: 10px;
+      color: #007e66;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .confirm-btn {
+      max-width: 90%;
+      background-color: #007e66;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      padding: 15px;
+      font-size: 16px;
+      cursor: pointer;
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <a href="virement-etape4.html"><i class="fas fa-arrow-left"></i></a>
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+    <a href="accueil.html"><i class="fas fa-times"></i></a>
+  </div>
+
+
+
+  <h1>Récapitulatif</h1>
+
+  <div class="amount-display">
+    <i class="fas fa-arrow-right-arrow-left"></i> 
+    <span id="recapMontant">0 €</span>
+  </div>
+
+  <!-- Depuis -->
+  <div class="recap-block">
+    <div class="recap-title">Depuis Louhan Charlotte</div>
+    <div class="recap-sub">Compte courant</div>
+    <div class="solde">Solde théorique après virement : <span id="recapSolde">0,00 €</span></div>
+    
+  </div>
+
+  <!-- Vers -->
+<div class="recap-block">
+  <div class="recap-title" id="recapBeneficiaireNom">Nom à afficher</div>
+  <div class="recap-sub" id="recapBeneficiaireIban">IBAN : ...</div>
+  
+</div>
+
+
+  <!-- Motif -->
+  <div class="recap-block">
+    <div class="recap-title">Pour le motif</div>
+    <div class="recap-sub" id="recapMotif">Aucun</div>
+    
+  </div>
+
+
+  <!-- Quand -->
+  <div class="recap-block">
+    <div class="recap-title">Quand</div>
+    <div class="recap-sub">Aujourd'hui</div>
+    
+  </div>
+<!-- Bouton modifié avec id et désactivé par défaut -->
+<button id="confirmBtn" class="confirm-btn" onclick="confirmerVirement()" disabled>
+  Confirmer le virement
+</button>
+
+<button class="confirm-btn" onclick="window.location.href='chargement.html'">Confirmer le virement</button>
+
+
+<script>
+  // Charger les infos sauvegardées
+  const montant = localStorage.getItem('virementMontant') || 0;
+  const motif = localStorage.getItem('virementMotif') || "Aucun";
+const beneficiaireNom = localStorage.getItem('virementBeneficiaireNom') || "Non renseigné";
+const beneficiaireIban = localStorage.getItem('virementBeneficiaireIban') || "";
+
+document.getElementById('recapBeneficiaireNom').innerText = beneficiaireNom;
+document.getElementById('recapBeneficiaireIban').innerText = "IBAN : " + beneficiaireIban;
+
+
+  // Afficher montant
+  document.getElementById('recapMontant').innerText = parseFloat(montant).toFixed(2).replace('.', ',') + ' €';
+
+  // Afficher motif
+  document.getElementById('recapMotif').innerText = motif;
+
+  // Calculer solde après virement
+  const soldeInitial = 1700000.00; // Le même solde qu’avant
+  const soldeApres = (soldeInitial - parseFloat(montant)).toFixed(2).replace('.', ',') + ' €';
+  document.getElementById('recapSolde').innerText = soldeApres;
+</script>
+<script>
+  // Retour à la page précédente
+  function retour() {
+    window.history.back();
+  }
+
+  // Fermer = retour à la page d'accueil
+  function fermer() {
+    window.location.href = "accueil.html";
+  }
+</script>
+
+
+
+
+</body>
+
+</html>
